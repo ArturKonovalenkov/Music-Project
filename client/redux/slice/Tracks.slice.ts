@@ -33,6 +33,7 @@ const initialState: stateType = {
       setVisiblePlayBar: (state,action)=>{
         state.visiblePlayBar = action.payload;
       },
+      
   },
 })
 export const {setTracks,setInput,setIsPlaying,setCurrentTrack,setCurrentTime,setVisiblePlayBar} = tracksSlice.actions;
