@@ -1,7 +1,7 @@
 import style from "./PlayBar.module.scss"
 import { useDispatch, useSelector } from 'react-redux';
 import { IconButton } from '@mui/material';
-import { Pause, PlayArrow, SkipNext } from '@mui/icons-material';
+import { Pause, PlayArrow, SkipNext, SkipPrevious } from '@mui/icons-material';
 import { setCurrentTime, setCurrentTrack, setIsPlaying, setVisiblePlayBar } from '../../../redux/slice/Tracks.slice';
 import {audio, formatDuration} from "../../Tracks/Tracks"
 import TimeControl from './TimeControl/TimeControl';
@@ -32,32 +32,43 @@ export default function PlayBar() {
           }
       };
       const handlerNext = () =>{
-        console.log("ok");
           const currentIndex = tracks.findIndex((track)=> track.id === currentTrack.id)
           console.log("🚀 ~ file: PlayBar.tsx:39 ~ handlerNext ~ currentIndex:", currentIndex)
           if (currentIndex !== -1 && currentIndex + 1 < tracks.length) {
-            dispatch(setCurrentTrack(tracks[currentIndex + 1])) ;
+            const nextTrack = tracks[currentIndex + 1]
+            dispatch(setCurrentTrack(nextTrack)) ;
             dispatch(setIsPlaying(true));
-            audio.src = currentTrack.src;
+            audio.src = nextTrack.src;
             audio.currentTime = 0;
             audio.play();
           }
         }
+
+        const handlerPrevious = () =>{
+            const currentIndex = tracks.findIndex((track)=> track.id === currentTrack.id)
+            if (currentIndex > 0 && currentIndex - 1 < tracks.length) {
+              const previousTrack = tracks[currentIndex - 1]
+              dispatch(setCurrentTrack(previousTrack)) ;
+              dispatch(setIsPlaying(true));
+              audio.src = previousTrack.src;
+              audio.currentTime = 0;
+              audio.play();
+            }
+          }
         
-        audio.onended = () => {
-          // Здесь вы можете реализовать логику для автоматического переключения на следующий трек
-          handlerNext();
-      };
   return (
     visiblePlayBar && 
       <div className={style.playbar}>
         <img className={style.preview} src={preview} alt="" />
+        <IconButton onClick={handlerPrevious}>
+          <SkipPrevious />
+        </IconButton>
         <IconButton onClick={handleToggle}>
           {isPlaying ? <Pause /> : <PlayArrow />}
         </IconButton>
         <IconButton onClick={handlerNext}>
-        <SkipNext />
-      </IconButton>
+          <SkipNext />
+        </IconButton>
         <div className={style.credits}>
           <h4>{title}</h4>
           <p>{artists}</p>
