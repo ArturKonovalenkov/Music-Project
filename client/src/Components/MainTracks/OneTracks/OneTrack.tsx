@@ -5,8 +5,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentTrack, setIsPlaying, setVisiblePlayBar } from '../../../../redux/slice/Tracks.slice'
 import cn from "classnames"
 import {audio,formatDuration} from "../../../Tracks/Tracks"
+import { RootState } from '../../../../redux/type/type'
 
-export default function OneTrack({track}) {
+interface TrackType {
+  id: number;
+  src: string;
+  preview:string;
+  title:string;
+  duration: number;
+  artists:string;
+ }
+
+export default function OneTrack({track}: { track: TrackType }) {
   const dispatch = useDispatch()
 
   const {id, src, preview, title, duration, artists} = track
@@ -15,9 +25,9 @@ export default function OneTrack({track}) {
   const currentTrack = useSelector((state: RootState) => state.tracks.currentTrack);
 
 
-  const isCurrentTrack = currentTrack && currentTrack.id === id;
+  const isCurrentTrack = currentTrack  && currentTrack.id === id;
   
-  const handlerToggle = (track) => {
+  const handlerToggle = (track: TrackType) => {
     if (isCurrentTrack) {
       if (isPlaying) {
         audio.pause();

@@ -2,11 +2,11 @@ import style from "./PlayBar.module.scss"
 import { useDispatch, useSelector } from 'react-redux';
 import { IconButton } from '@mui/material';
 import { Pause, PlayArrow, SkipNext, SkipPrevious } from '@mui/icons-material';
-import { setCurrentTime, setCurrentTrack, setIsPlaying, setVisiblePlayBar } from '../../../redux/slice/Tracks.slice';
+import {  setCurrentTrack, setIsPlaying, setVisiblePlayBar } from '../../../redux/slice/Tracks.slice';
 import {audio, formatDuration} from "../../Tracks/Tracks"
 import TimeControl from './TimeControl/TimeControl';
-import { RootState } from '@reduxjs/toolkit/query';
-import { useState } from "react";
+import { RootState } from '../../../redux/type/type';
+
 
 
 
@@ -20,6 +20,7 @@ export default function PlayBar() {
     const tracks = useSelector((state: RootState)=> state.tracks.tracks)
 
     const {title, artists, preview, duration} = currentTrack || {}
+    console.log("🚀 ~ file: PlayBar.tsx:23 ~ PlayBar ~ duration:", duration)
 
     const handleToggle = () => {    
         if (isPlaying) {
@@ -32,7 +33,7 @@ export default function PlayBar() {
           }
       };
       const handlerNext = () =>{
-          const currentIndex = tracks.findIndex((track)=> track.id === currentTrack.id)
+          const currentIndex =  tracks.findIndex((track)=> track.id === currentTrack!.id) 
           console.log("🚀 ~ file: PlayBar.tsx:39 ~ handlerNext ~ currentIndex:", currentIndex)
           if (currentIndex !== -1 && currentIndex + 1 < tracks.length) {
             const nextTrack = tracks[currentIndex + 1]
@@ -45,7 +46,7 @@ export default function PlayBar() {
         }
 
         const handlerPrevious = () =>{
-            const currentIndex = tracks.findIndex((track)=> track.id === currentTrack.id)
+            const currentIndex = tracks.findIndex((track)=> track.id === currentTrack!.id)
             if (currentIndex > 0 && currentIndex - 1 < tracks.length) {
               const previousTrack = tracks[currentIndex - 1]
               dispatch(setCurrentTrack(previousTrack)) ;
@@ -75,7 +76,7 @@ export default function PlayBar() {
         </div>
         <div className={style.slider}>
            <TimeControl/>
-          <p>{formatDuration(duration)}</p>
+          <p>{duration && formatDuration(duration)}</p>
         </div>
       </div>
   )
