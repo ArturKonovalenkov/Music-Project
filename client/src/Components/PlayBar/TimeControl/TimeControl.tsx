@@ -1,8 +1,8 @@
-import React, { useEffect} from 'react'
+import  { useEffect} from 'react'
 import { audio, formatDuration } from '../../../Tracks/Tracks';
 import { useDispatch, useSelector } from 'react-redux';
 import { Slider } from '@mui/material';
-import { RootState } from '@reduxjs/toolkit/query';
+import { RootState } from '../../../../redux/type/type';
 import { setCurrentTime } from '../../../../redux/slice/Tracks.slice';
 
 export default function TimeControl() {
@@ -15,10 +15,11 @@ export default function TimeControl() {
   
     const formatedCurrentTime = formatDuration(currentTime)
   
-    const sliderCurrenttime = Math.round((currentTime / duration || 0) * 100)
+    const sliderCurrenttime = Math.round(((currentTime || 1) / (duration || 1) || 0) * 100)
   
-    const handlerChangeCurrentTime = (_, value: number)=>{
-      const time = Math.round((value/100) * duration)
+    const handlerChangeCurrentTime = (event: Event, value: number | number[])=>{
+      event.preventDefault()
+      const time = Math.round((value as number / 100) * (duration || 1))
       dispatch(setCurrentTime(time))
       audio.currentTime = time
   }

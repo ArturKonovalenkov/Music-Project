@@ -5,13 +5,14 @@ type tracksType = {
   preview:string,
   title:string,
   duration: number,
+  artists:string
  }
 
   export type stateType = {
      tracks: tracksType[]
      input:string,
      isPlaying:boolean,
-     currentTrack:null,
+     currentTrack: tracksType | null, 
      currentTime:number,
      visiblePlayBar: boolean
    };

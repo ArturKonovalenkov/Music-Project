@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect} from 'react'
 import {trackList} from "../../Tracks/Tracks"
 import style from "./Main.module.scss"
 import OneTrack from './OneTracks/OneTrack';
 import { Input } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/type/store.types';
+import { RootState } from '../../../redux/type/type';
 import { setInput, setTracks } from '../../../redux/slice/Tracks.slice';
 
 export default function Main() {
@@ -13,7 +13,7 @@ export default function Main() {
   const tracks = useSelector((state: RootState)=> state.tracks.tracks)
   const input = useSelector((state: RootState)=> state.tracks.input)
 
-  const searchMusic = (value)=>{
+  const searchMusic = (value:string)=>{
     const lowerCaseValue = value.toLowerCase()
     return tracks.filter((track)=> track.title.toLowerCase().includes(lowerCaseValue) || track.artists.toLowerCase().includes(lowerCaseValue))
     }
@@ -21,10 +21,7 @@ export default function Main() {
   const searchedMusic = searchMusic(input)
 
   useEffect(() => {
-   dispatch(setTracks(trackList))
-  }, [])
-
-  useEffect(() => {
+    dispatch(setTracks(trackList))
    dispatch(setTracks(searchedMusic)) 
   }, [dispatch])
   
