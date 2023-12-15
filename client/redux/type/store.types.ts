@@ -7,6 +7,16 @@ type tracksType = {
   duration: number,
   artists:string
  }
+ type inputType = {
+  login: string,
+  email: string,
+  password:string,
+  checkPassword:string,
+ }
+ type authType = {
+  name: string,
+  auth: boolean,
+ }
 
   export type stateType = {
      tracks: tracksType[]
@@ -16,4 +26,10 @@ type tracksType = {
      currentTime:number,
      visiblePlayBar: boolean
    };
+
+   export type stateUserType = {
+     users:tracksType[],
+     inputs:inputType,
+     authUser:authType,
+  };
 

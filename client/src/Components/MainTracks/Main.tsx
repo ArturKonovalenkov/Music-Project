@@ -10,20 +10,29 @@ import { setInput, setTracks } from '../../../redux/slice/Tracks.slice';
 export default function Main() {
 
   const dispatch = useDispatch()
+  
   const tracks = useSelector((state: RootState)=> state.tracks.tracks)
+  console.log("🚀 ~ file: Main.tsx:15 ~ Main ~ tracks:", tracks)
   const input = useSelector((state: RootState)=> state.tracks.input)
+
+  useEffect(() => {
+    dispatch(setTracks(trackList))
+  }, [])
 
   const searchMusic = (value:string)=>{
     const lowerCaseValue = value.toLowerCase()
     return tracks.filter((track)=> track.title.toLowerCase().includes(lowerCaseValue) || track.artists.toLowerCase().includes(lowerCaseValue))
     }
-
-  const searchedMusic = searchMusic(input)
+    
+    const searchedMusic = searchMusic(input)
 
   useEffect(() => {
-    dispatch(setTracks(trackList))
-   dispatch(setTracks(searchedMusic)) 
+    dispatch(setTracks(searchedMusic))
   }, [dispatch])
+
+
+
+
   
   return (
     <div className={style.search}>

@@ -49,7 +49,7 @@ export default function OneTrack({track}: { track: TrackType }) {
     
   return (
     <div className={cn(style.track, isCurrentTrack && style.playing)} onClick={()=>handlerToggle(track)}>
-      <IconButton>
+      <IconButton style={{color: "white"}}>
       {isCurrentTrack && isPlaying ? <Pause /> : <PlayArrow />}
       </IconButton>
       <img className={style.preview} src={preview} alt="not-icon" />
