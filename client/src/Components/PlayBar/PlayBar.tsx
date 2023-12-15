@@ -20,7 +20,6 @@ export default function PlayBar() {
     const tracks = useSelector((state: RootState)=> state.tracks.tracks)
 
     const {title, artists, preview, duration} = currentTrack || {}
-    console.log("🚀 ~ file: PlayBar.tsx:23 ~ PlayBar ~ duration:", duration)
 
     const handleToggle = () => {    
         if (isPlaying) {
@@ -34,7 +33,6 @@ export default function PlayBar() {
       };
       const handlerNext = () =>{
           const currentIndex =  tracks.findIndex((track)=> track.id === currentTrack!.id) 
-          console.log("🚀 ~ file: PlayBar.tsx:39 ~ handlerNext ~ currentIndex:", currentIndex)
           if (currentIndex !== -1 && currentIndex + 1 < tracks.length) {
             const nextTrack = tracks[currentIndex + 1]
             dispatch(setCurrentTrack(nextTrack)) ;

@@ -1,0 +1,41 @@
+
+
+.container_registr{
+    border: 1px solid #1976d2;
+    border-radius: 20px;
+    margin-top: 100px;
+
+}
+.title{
+    color: #ffffff;
+    font-size: 30px;
+    text-align: center;
+    margin: 40px 0;
+}
+
+.input {
+    width: 300px;
+    margin: 20px 150px;
+  
+    & > * {
+      text-align: center !important;
+      color: #fefdfd;
+      padding: 14px;
+      font-size: 18px !important;
+    }
+    color: #ffffff !important;
+  }
+  .container_button{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .button{
+    color: white !important;
+    text-align: center;
+    margin: 10px 0 !important;
+}
+.link{
+    color: white;
+    text-decoration: none;
+}
