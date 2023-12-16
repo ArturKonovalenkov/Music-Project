@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { stateUserType } from "../type/store.types";
 
-import { userAuthCheck } from "../Thunk/Users.Thunk"
+import { logoutUser, userAuthCheck, userLogin } from "../Thunk/Users.Thunk"
 
 
 const initialState: stateUserType = {
@@ -10,32 +10,43 @@ const initialState: stateUserType = {
       name: "",
       auth: false
     },
-    inputs:{
+    inputRegister:{
         login: "",
         email: "",
         password: "",
         checkPassword: "",
-    }
+    },
+    inputLogin:{
+      email: "",
+      password: "",
+  }
   }
 
   const usersSlice = createSlice({
     name: "users",
     initialState,
     reducers:{
-        setInput: (state, action)=>{
-            state.inputs = { ...state.inputs, ...action.payload }
+        setInputRegister: (state, action)=>{
+            state.inputRegister = { ...state.inputRegister, ...action.payload }
          },
-        resetInput: (state)=>{
-          state.inputs = {
+        resetInputRegister: (state)=>{
+          state.inputRegister = {
               login: "",
               email: "",
               password: "",
               checkPassword: "",
           }
          },  
-         setAuthUser: (state, action) =>{
-          console.log(action.payload);
-          
+         setInputLogin: (state, action)=>{
+          state.inputLogin = { ...state.inputLogin, ...action.payload }
+         },
+         resetInputLogin: (state)=>{
+            state.inputLogin = {
+                email: "",
+                password: "",
+          }
+          },  
+         setAuthUser: (state, action) =>{          
           state.authUser = { ...state.authUser, ...action.payload }
          }
      
@@ -43,9 +54,15 @@ const initialState: stateUserType = {
    extraReducers(builder) {
         builder
         .addCase(userAuthCheck.fulfilled, (state, action)=>{
-          state.authUser = { ...state.authUser, ...action.payload }
+          if(action.payload){
+          const {login} = action.payload
+          state.authUser = { name: login, auth: true}
+        }
+        })
+        .addCase(logoutUser.fulfilled, (state)=>{
+          state.authUser = { name: "", auth: false}
         })
     },
 })
-export const {setInput,resetInput,setAuthUser} = usersSlice.actions;
+export const {setInputRegister,resetInputRegister,setInputLogin,resetInputLogin,setAuthUser} = usersSlice.actions;
 export default usersSlice.reducer

@@ -8,7 +8,8 @@ const initialState: stateType = {
     isPlaying: false,
     currentTrack: null,
     currentTime: 0,
-    visiblePlayBar: false
+    visiblePlayBar: false,
+    filterTracks: [],
   }
 
   const tracksSlice = createSlice({
@@ -32,9 +33,12 @@ const initialState: stateType = {
       },
       setVisiblePlayBar: (state,action)=>{
         state.visiblePlayBar = action.payload;
+      },      
+      setFilterTrack: (state,action)=>{
+        state.filterTracks = [...state.filterTracks, ...action.payload]
       },
       
   },
 })
-export const {setTracks,setInput,setIsPlaying,setCurrentTrack,setCurrentTime,setVisiblePlayBar} = tracksSlice.actions;
+export const {setTracks,setInput,setIsPlaying,setCurrentTrack,setCurrentTime,setVisiblePlayBar,setFilterTrack} = tracksSlice.actions;
 export default tracksSlice.reducer
