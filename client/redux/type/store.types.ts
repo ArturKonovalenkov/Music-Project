@@ -7,11 +7,15 @@ type tracksType = {
   duration: number,
   artists:string
  }
- type inputType = {
+ type inputRegisterType = {
   login: string,
   email: string,
   password:string,
   checkPassword:string,
+ }
+ type inputLoginType = {
+  email: string,
+  password:string,
  }
  type authType = {
   name: string,
@@ -24,12 +28,14 @@ type tracksType = {
      isPlaying:boolean,
      currentTrack: tracksType | null, 
      currentTime:number,
-     visiblePlayBar: boolean
+     visiblePlayBar: boolean,
+     filterTracks: tracksType[],
    };
 
    export type stateUserType = {
      users:tracksType[],
-     inputs:inputType,
+     inputRegister:inputRegisterType,
+     inputLogin:inputLoginType,
      authUser:authType,
   };
 

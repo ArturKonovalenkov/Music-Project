@@ -4,47 +4,24 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import style from "./Header.module.scss"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuthUser } from '../../../redux/slice/Users.slice';
 import { useEffect } from 'react';
 import { RootState } from '../../../redux/type/type';
+import { logoutUser, userAuthCheck } from '../../../redux/Thunk/Users.Thunk';
 
 
 export default function Header() {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const userAuth = useSelector((state: RootState)=> state.users.authUser)
-  console.log("🚀 ~ file: Header.tsx:19 ~ Header ~ userAuth:", userAuth)
-
-const authUserCheсk = async() =>{
-    try {
-       const responce = await fetch("http://localhost:3000/auth",{
-          credentials: "include",
-      });
-      const result = await responce.json()
-      console.log("🚀 ~ file: Header.tsx:22 ~ authUserChek ~ result:", result)
-      dispatch(setAuthUser({name: result.login, auth: true}))
-  } catch (error) {
-      console.error("ne udalos pokazat", error);   
-  } 
-  }
-  
-  const handlerLogout = async() =>{
-    try {
-      const responce = await fetch("http://localhost:3000/auth/logout",{
-         credentials: "include",
-     });
-     const result = await responce.json()
-     dispatch(setAuthUser({name: result.login, auth: false}))
- } catch (error) {
-     console.error("ne udalos pokazat", error);   
- } 
-  }
+  console.log("🚀 ~ file: Header.tsx:21 ~ Header ~ userAuth:", userAuth)
 
   useEffect(()=>{
-    authUserCheсk()
+    dispatch(userAuthCheck())
   },[])
 
   return (
@@ -57,7 +34,7 @@ const authUserCheсk = async() =>{
             <div className={style.container_button}>
               {userAuth.auth ? <div style={{display: "flex", alignItems: "center", gap: "2rem"}}>
               <div>hello {userAuth.name}</div>
-              <Button onClick={handlerLogout} className={style.button} color="inherit">Выйти</Button>
+              <Button onClick={()=> {dispatch(logoutUser()), navigate("/auth/login")}} className={style.button} color="inherit">Выйти</Button>
               </div>
               :
                 <><Link to="/auth/register"> <Button className={style.button} color="inherit">Зарегестрироваться</Button></Link>
