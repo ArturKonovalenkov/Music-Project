@@ -49,15 +49,11 @@ const initialState: stateUserType = {
          setAuthUser: (state, action) =>{          
           state.authUser = { ...state.authUser, ...action.payload }
          }
-     
   },   
    extraReducers(builder) {
         builder
-        .addCase(userAuthCheck.fulfilled, (state, action)=>{
-          if(action.payload){
-          const {login} = action.payload
-          state.authUser = { name: login, auth: true}
-        }
+        .addCase(userAuthCheck.fulfilled, (state,action)=>{
+          state.authUser = { name: action.payload, auth: true}
         })
         .addCase(logoutUser.fulfilled, (state)=>{
           state.authUser = { name: "", auth: false}

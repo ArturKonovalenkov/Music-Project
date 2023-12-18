@@ -14,12 +14,14 @@ function App() {
 
   return (
       <>
-      <Header />
       <div className={style.wrapper}>
        <Routes>
+        <Route path='/' element={ <Header />}>
+          <Route path='/main' element={ <Main />}/>
           <Route path='/' element={ <Main />}/>
           <Route path='/auth/register' element={ <Register />}/>
           <Route path='/auth/login' element={ <Login />}/>
+        </Route>
        </Routes>
       </div>
       <PlayBar />

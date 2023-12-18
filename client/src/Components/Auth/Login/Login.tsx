@@ -3,7 +3,7 @@ import { Button, Input } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { RootState } from '../../../../redux/type/type'
-import { setInputLogin,resetInputLogin } from '../../../../redux/slice/Users.slice'
+import { setInputLogin,resetInputLogin, setAuthUser } from '../../../../redux/slice/Users.slice'
 
 
 export default function Login() {
@@ -28,6 +28,7 @@ export default function Login() {
           alert(result.err)
         }else{
           if(responce.ok){
+            dispatch(setAuthUser({name: result.login,auth: true}))
             dispatch(resetInputLogin())
             navigate('/')
           }
