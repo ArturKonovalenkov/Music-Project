@@ -3,7 +3,7 @@ import { Button, Input } from '@mui/material'
 import { RootState } from '../../../../redux/type/type'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { resetInputRegister, setInputRegister } from '../../../../redux/slice/Users.slice'
+import { resetInputRegister, setAuthUser, setInputRegister } from '../../../../redux/slice/Users.slice'
 
 export default function Register() {
 
@@ -28,6 +28,7 @@ export default function Register() {
           alert(result.err)
         }else{
           if(responce.ok){
+            dispatch(setAuthUser({name: result.login,auth: true}))
             dispatch(resetInputRegister())
             navigate('/')
           }

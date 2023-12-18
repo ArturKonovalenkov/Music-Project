@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { stateType } from "../type/store.types";
+import { musicAll } from "../Thunk/Music.thunk"
 
 
 const initialState: stateType = {
@@ -38,6 +39,12 @@ const initialState: stateType = {
         state.filterTracks = [...state.filterTracks, ...action.payload]
       },
       
+  },
+  extraReducers(builder) {
+    builder
+    .addCase(musicAll.fulfilled,(state,action)=>{
+      state.tracks = action.payload
+    })
   },
 })
 export const {setTracks,setInput,setIsPlaying,setCurrentTrack,setCurrentTime,setVisiblePlayBar,setFilterTrack} = tracksSlice.actions;

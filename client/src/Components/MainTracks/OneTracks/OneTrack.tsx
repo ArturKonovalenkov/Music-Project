@@ -4,7 +4,7 @@ import { Pause, PlayArrow } from '@mui/icons-material'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentTrack, setIsPlaying, setVisiblePlayBar } from '../../../../redux/slice/Tracks.slice'
 import cn from "classnames"
-import {audio,formatDuration} from "../../../Tracks/Tracks"
+import {audio,formatDuration} from "../../../function/function"
 import { RootState } from '../../../../redux/type/type'
 
 interface TrackType {

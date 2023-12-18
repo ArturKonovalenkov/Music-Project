@@ -7,11 +7,18 @@
       display: none;
     }
   }
-  
   .wrapper {
     display: flex;
-    padding: 10px;
+    flex-direction: column;
     gap: 60px;
-    width: min(600px, 90vw);
+    width: 100%;
     margin: auto;
   }
+
+  // .wrapper {
+  //   display: flex;
+  //   flex-direction: column;
+  //   gap: 60px;
+  //   width: min(600px, 90vw);
+  //   margin: auto;
+  // }

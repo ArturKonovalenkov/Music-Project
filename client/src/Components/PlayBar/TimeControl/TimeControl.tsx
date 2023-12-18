@@ -1,5 +1,5 @@
 import  { useEffect} from 'react'
-import { audio, formatDuration } from '../../../Tracks/Tracks';
+import { audio, formatDuration } from '../../../function/function';
 import { useDispatch, useSelector } from 'react-redux';
 import { Slider } from '@mui/material';
 import { RootState } from '../../../../redux/type/type';

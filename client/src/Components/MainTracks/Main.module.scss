@@ -1,10 +1,12 @@
 .search {
     flex: 1;
+    width: min(600px, 90vw);
+    margin: auto;
   }
   
   .input {
     width: 500px;
-    margin: 10px 150px;
+    margin: 10px 10%;
 
     
     & > * {

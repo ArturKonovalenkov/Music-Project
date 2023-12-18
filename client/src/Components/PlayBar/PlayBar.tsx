@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IconButton } from '@mui/material';
 import { Pause, PlayArrow, SkipNext, SkipPrevious } from '@mui/icons-material';
 import {  setCurrentTrack, setIsPlaying, setVisiblePlayBar } from '../../../redux/slice/Tracks.slice';
-import {audio, formatDuration} from "../../Tracks/Tracks"
+import {audio, formatDuration} from "../../function/function"
 import TimeControl from './TimeControl/TimeControl';
 import { RootState } from '../../../redux/type/type';
 
