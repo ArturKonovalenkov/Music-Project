@@ -6,7 +6,6 @@ export const userAuthCheck = createAsyncThunk("fetch/userAuthCheck",async()=>{
            credentials: "include",
        });
        const result = await responce.json()
-       console.log("🚀 ~ file: Users.Thunk.ts:9 ~ userAuthCheck ~ result:", result.user.login)
        return result.user.login
    } catch (error) {
        console.error("ne udalos pokazat", error);   

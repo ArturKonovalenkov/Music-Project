@@ -15,7 +15,7 @@ export default function Main() {
   const input = useSelector((state: RootState)=> state.tracks.input)
 
   useEffect(() => {
-    dispatch(musicAll(input, tracks))
+    dispatch(musicAll(input))
   }, [input])
 
   return (

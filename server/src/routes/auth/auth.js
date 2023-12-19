@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 const { User } = require("../../../db/models");
 
 routerAuth.get("/", (req, res) => {
-  console.log({ user: req.session?.user || "" });
   res.json({ user: req.session?.user || "" });
 });
 
