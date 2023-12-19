@@ -11,6 +11,7 @@ const initialState: stateType = {
     currentTime: 0,
     visiblePlayBar: false,
     filterTracks: [],
+    inRandomTracks: false,
   }
 
   const tracksSlice = createSlice({
@@ -18,7 +19,7 @@ const initialState: stateType = {
     initialState,
     reducers:{
       setTracks: (state,action)=>{
-        state.tracks = [...state.tracks, ...action.payload]
+        state.tracks = action.payload
       },
       setInput: (state,action)=>{
         state.input = action.payload;
@@ -34,9 +35,12 @@ const initialState: stateType = {
       },
       setVisiblePlayBar: (state,action)=>{
         state.visiblePlayBar = action.payload;
-      },      
+      },    
+      setInRandom: (state,action)=>{
+        state.inRandomTracks = action.payload;
+      },    
       setFilterTrack: (state,action)=>{
-        state.filterTracks = [...state.filterTracks, ...action.payload]
+        state.filterTracks = action.payload
       },
       
   },
@@ -47,5 +51,5 @@ const initialState: stateType = {
     })
   },
 })
-export const {setTracks,setInput,setIsPlaying,setCurrentTrack,setCurrentTime,setVisiblePlayBar,setFilterTrack} = tracksSlice.actions;
+export const {setTracks,setInput,setIsPlaying,setCurrentTrack,setCurrentTime,setVisiblePlayBar,setFilterTrack,setInRandom} = tracksSlice.actions;
 export default tracksSlice.reducer

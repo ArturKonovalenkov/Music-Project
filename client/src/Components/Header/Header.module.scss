@@ -19,7 +19,17 @@
         color: rgb(255, 255, 255) !important;
         font-weight: 500;
     }
-
+    .link{
+        text-decoration: none;
+        color: rgb(56, 55, 55);
+    }
+    .link:hover{
+        color: rgb(0, 0, 0);
+    }
+    .avatar:hover{
+        width: 45px;
+        height: 45px;
+    }
 }
 
 // @media only screen and (min-width: 768px) and (max-width: 991px) {

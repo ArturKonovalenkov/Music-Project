@@ -30,6 +30,7 @@ type tracksType = {
      currentTime:number,
      visiblePlayBar: boolean,
      filterTracks: tracksType[],
+     inRandomTracks:boolean,
    };
 
    export type stateUserType = {
